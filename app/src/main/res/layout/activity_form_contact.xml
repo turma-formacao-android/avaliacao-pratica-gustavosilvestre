@@ -15,34 +15,44 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:layout_weight="1"
             android:id="@+id/contact_form_zipcode"
             android:hint="ZipCode"
-            android:layout_width="match_parent"
+            android:layout_weight="4"
+            android:inputType="numberSigned"
+            android:layout_width="0dp"
             android:layout_height="match_parent" />
 
         <ImageButton
-            android:id="@+id/buttonSearch"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/buttonSearchZipCode"
             android:src="@mipmap/ic_action_av_loop"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/contact_form_street"
+            android:hint="Street"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/contact_form_number"
+            android:hint="Number"
+            android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-
-
-
-    <EditText
-        android:id="@+id/contact_form_street"
-        android:hint="Street"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/contact_form_number"
-        android:hint="Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/contact_form_complement"
@@ -56,17 +66,129 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/contact_form_city"
-        android:hint="City"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_weight="3"
+            android:id="@+id/contact_form_city"
+            android:hint="City"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/contact_form_state"
+            android:hint="State"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Telephone"
+        android:layout_weight="1"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/contact_form_state"
-        android:hint="State"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_weight="1"
+            android:id="@+id/spinner_telephone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+
+        <ImageButton
+            android:id="@+id/buttonAddTelephone"
+            android:src="@mipmap/ic_hl_action_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/buttonDeleteTelephone"
+            android:src="@mipmap/ic_hl_action_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="Email"
+        android:layout_weight="1"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_weight="1"
+            android:id="@+id/spinner_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+
+        <ImageButton
+            android:id="@+id/buttonAddEmail"
+            android:src="@mipmap/ic_hl_action_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/buttonDeleteEmail"
+            android:src="@mipmap/ic_hl_action_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="Social Network"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_weight="1"
+            android:id="@+id/spinner_socialNetwork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+
+        <ImageButton
+            android:id="@+id/buttonAddSocialNetwork"
+            android:src="@mipmap/ic_hl_action_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/buttonDeleteSocialNetwork"
+            android:src="@mipmap/ic_hl_action_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

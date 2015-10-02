@@ -1,4 +1,4 @@
-package br.com.cast.turmaformacao.agendaprova.persistence.contact;
+package br.com.cast.turmaformacao.agendaprova.model.persistence.contact;
 
 import android.content.ContentValues;
 

@@ -8,7 +8,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/layout_search"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:hint=" Search by name..."
+            android:background="#ccf4f4f4"
+            android:inputType="textCapSentences"
+            android:layout_weight="1"
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/buttonSearchByName"
+            android:src="@mipmap/ic_action_av_loop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
    <ListView
+       android:layout_below="@id/layout_search"
        android:id="@+id/lv"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">

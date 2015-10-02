@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@mipmap/ic_action_add"
+        android:id="@+id/action_add"
+        android:orderInCategory="100"
+        android:title="Add Contact"
+        app:showAsAction="always" />
+
+
+</menu>

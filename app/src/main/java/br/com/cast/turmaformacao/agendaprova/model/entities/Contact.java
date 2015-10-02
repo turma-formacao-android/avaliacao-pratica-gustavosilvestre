@@ -3,6 +3,7 @@ package br.com.cast.turmaformacao.agendaprova.model.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class Contact implements Parcelable {
     private Address address;
     private List<Telephone> telephonesList;
     private List<SocialNetwork> socialNetworksList;
-
+    private List<Email> emailList;
 
 
     public Integer getId() {
@@ -58,6 +59,14 @@ public class Contact implements Parcelable {
         this.socialNetworksList = socialNetworksList;
     }
 
+    public List<Email> getEmailList() {
+        return emailList;
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList = emailList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,6 +94,16 @@ public class Contact implements Parcelable {
         return result;
     }
 
+
+
+    public Contact() {
+        address = new Address();
+        telephonesList = new ArrayList<>();
+        emailList = new ArrayList<>();
+        socialNetworksList = new ArrayList<>();
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -92,15 +111,12 @@ public class Contact implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeString(this.name);
+        dest.writeValue(this.id == null ? -1 : this.id);
+        dest.writeString(this.name == null ? "" : this.name);
         dest.writeParcelable(this.address, 0);
         dest.writeTypedList(telephonesList);
         dest.writeTypedList(socialNetworksList);
-    }
-
-    public Contact() {
-        address = new Address();
+        dest.writeTypedList(emailList);
     }
 
     protected Contact(Parcel in) {
@@ -109,6 +125,7 @@ public class Contact implements Parcelable {
         this.address = in.readParcelable(Address.class.getClassLoader());
         this.telephonesList = in.createTypedArrayList(Telephone.CREATOR);
         this.socialNetworksList = in.createTypedArrayList(SocialNetwork.CREATOR);
+        this.emailList = in.createTypedArrayList(Email.CREATOR);
     }
 
     public static final Creator<Contact> CREATOR = new Creator<Contact>() {

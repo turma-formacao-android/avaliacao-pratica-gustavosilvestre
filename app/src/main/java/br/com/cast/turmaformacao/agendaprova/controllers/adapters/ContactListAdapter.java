@@ -1,19 +1,31 @@
 package br.com.cast.turmaformacao.agendaprova.controllers.adapters;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
+import br.com.cast.turmaformacao.agendaprova.R;
 import br.com.cast.turmaformacao.agendaprova.model.entities.Contact;
 
 /**
  * Created by Administrador on 01/10/2015.
  */
-public class ContactListAdapter extends BaseAdapter{
+public class ContactListAdapter extends BaseAdapter {
+
+
+    private Activity context;
+
+    public ContactListAdapter(Activity context, List<Contact> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     private List<Contact> list;
+
 
     @Override
     public int getCount() {
@@ -31,7 +43,22 @@ public class ContactListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+    public View getView(int postion, View view, ViewGroup viewGroup) {
+
+        Contact contact = getItem(postion);
+
+        View v = context.getLayoutInflater().inflate(R.layout.list_item_contact, viewGroup, false);
+
+        TextView name = (TextView) v.findViewById(R.id.list_item_name);
+        name.setText(contact.getName());
+
+        TextView street = (TextView) v.findViewById(R.id.list_item_street);
+        street.setText(contact.getAddress().getStreet());
+
+        TextView number = (TextView) v.findViewById(R.id.list_item_number);
+        number.setText(contact.getAddress().getNumber());
+
+
+        return v;
     }
 }

@@ -12,6 +12,34 @@ public class Email implements Parcelable {
     private String email;
     private Contact contact;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return this.email;
+    }
 
     @Override
     public int describeContents() {
@@ -20,16 +48,18 @@ public class Email implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeString(this.email);
+        dest.writeValue(this.id == null ? -1 : this.id);
+        dest.writeString(this.email == null ? "" : this.email);
         dest.writeParcelable(this.contact, flags);
     }
 
     public Email() {
+        contact = new Contact();
     }
 
     protected Email(Parcel in) {
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        Integer id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.id = id == -1 ? null : id;
         this.email = in.readString();
         this.contact = in.readParcelable(Contact.class.getClassLoader());
     }
