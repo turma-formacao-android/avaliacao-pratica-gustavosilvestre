@@ -25,6 +25,8 @@ import br.com.cast.turmaformacao.agendaprova.model.entities.Email;
 import br.com.cast.turmaformacao.agendaprova.model.entities.SocialNetwork;
 import br.com.cast.turmaformacao.agendaprova.model.entities.Telephone;
 import br.com.cast.turmaformacao.agendaprova.model.service.ContactBusinessService;
+import br.com.cast.turmaformacao.agendaprova.model.service.EmailBusinessService;
+import br.com.cast.turmaformacao.agendaprova.model.service.SocialNetworkBusinessService;
 import br.com.cast.turmaformacao.agendaprova.model.service.TelephoneBusinessService;
 import br.com.cast.turmaformacao.agendaprova.util.FormerHelper;
 
@@ -92,6 +94,24 @@ public class FormContactActivity extends AppCompatActivity implements AddressInt
 
     private void bindButtonDeleteSocialNetwork() {
         buttonDeleteSocialNetwork = (ImageButton) findViewById(R.id.buttonDeleteSocialNetwork);
+        buttonDeleteSocialNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(FormContactActivity.this)
+                        .setTitle("Confirmation")
+                        .setMessage("Do you really want to delete this social network?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SocialNetwork socialNetwork = (SocialNetwork) spinnerSocialNetwork.getSelectedItem();
+                                contact.getSocialNetworksList().remove(socialNetwork);
+                                SocialNetworkBusinessService.delete(socialNetwork);
+                                onUpdateSpinnerSocialNetwork();
+                                Toast.makeText(FormContactActivity.this, "Social network deleted successfully", Toast.LENGTH_SHORT);
+                            }
+                        }).setNeutralButton("No", null).show();
+            }
+        });
     }
 
     private void bindButtonAddSocialNetwork() {
@@ -136,11 +156,12 @@ public class FormContactActivity extends AppCompatActivity implements AddressInt
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                int selectedItemPosition = spinnerEmail.getSelectedItemPosition();
-                                contact.getEmailList().remove(selectedItemPosition);
+                                Email selectedItem = (Email) spinnerEmail.getSelectedItem();
+                                contact.getEmailList().remove(selectedItem);
+                                EmailBusinessService.delete(selectedItem);
                                 onUpdateSpinnerEmail();
                             }
-                        }).setNeutralButton("No",null).show();
+                        }).setNeutralButton("No", null).show();
             }
         });
     }
@@ -231,17 +252,17 @@ public class FormContactActivity extends AppCompatActivity implements AddressInt
 
     }
 
-    private void onUpdateSpinnerSocialNetwork(){
+    private void onUpdateSpinnerSocialNetwork() {
         List<SocialNetwork> socialNetworkList = contact.getSocialNetworksList();
-        ArrayAdapter<SocialNetwork> adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,socialNetworkList);
+        ArrayAdapter<SocialNetwork> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, socialNetworkList);
         spinnerSocialNetwork.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         buttonDeleteSocialNetwork.setEnabled(socialNetworkList.size() > 0);
     }
 
-    private void onUpdateSpinnerEmail(){
+    private void onUpdateSpinnerEmail() {
         List<Email> emailList = contact.getEmailList();
-        ArrayAdapter<Email> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,emailList);
+        ArrayAdapter<Email> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, emailList);
         spinnerEmail.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         buttonDeleteEmail.setEnabled(emailList.size() > 0);
@@ -281,13 +302,13 @@ public class FormContactActivity extends AppCompatActivity implements AddressInt
 
     public void init() {
         Bundle extras = getIntent().getExtras();
-        Contact contact = null;
+        Integer id = null;
 
         if (extras != null) {
-            contact = extras.getParcelable(ListContactActivity.PARAM_CONTACT);
+            id = extras.getInt(ListContactActivity.PARAM_CONTACT);
         }
 
-        this.contact = contact == null ? new Contact() : ContactBusinessService.getDependencies(contact);
+        this.contact = id == null ? new Contact() : ContactBusinessService.getById(id);
 
     }
 

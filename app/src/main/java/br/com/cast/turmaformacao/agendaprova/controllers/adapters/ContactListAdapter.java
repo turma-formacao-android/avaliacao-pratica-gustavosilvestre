@@ -58,6 +58,15 @@ public class ContactListAdapter extends BaseAdapter {
         TextView number = (TextView) v.findViewById(R.id.list_item_number);
         number.setText(contact.getAddress().getNumber());
 
+        TextView type_telephone = (TextView) v.findViewById(R.id.list_item_type_telephone);
+        type_telephone.setText(contact.getTelephonesList().size() == 0 ? "" : contact.getTelephonesList().get(0).getType());
+
+        TextView telephone = (TextView) v.findViewById(R.id.list_item_telephone);
+        telephone.setText(contact.getTelephonesList().size() == 0 ? "" : contact.getTelephonesList().get(0).getNumber());
+
+        TextView email = (TextView) v.findViewById(R.id.list_item_email);
+        email.setText(contact.getEmailList().size() == 0 ?  "" : contact.getEmailList().get(0).getEmail());
+
 
         return v;
     }

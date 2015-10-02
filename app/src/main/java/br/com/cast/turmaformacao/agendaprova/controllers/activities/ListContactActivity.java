@@ -20,6 +20,7 @@ import java.util.List;
 import br.com.cast.turmaformacao.agendaprova.R;
 import br.com.cast.turmaformacao.agendaprova.controllers.adapters.ContactListAdapter;
 import br.com.cast.turmaformacao.agendaprova.model.entities.Contact;
+import br.com.cast.turmaformacao.agendaprova.model.entities.ContatosAndroid;
 import br.com.cast.turmaformacao.agendaprova.model.service.ContactBusinessService;
 
 
@@ -38,6 +39,11 @@ public class ListContactActivity extends AppCompatActivity {
         bindListView();
         bindButtonSearchByName();
         bindEditTextSearchByName();
+
+        ContatosAndroid c = new ContatosAndroid(this);
+        List<Contact> lista = c.getContatos();
+
+        ContactBusinessService.saveContactAndroid(lista);
     }
 
     private void bindEditTextSearchByName() {
@@ -102,7 +108,6 @@ public class ListContactActivity extends AppCompatActivity {
                             Toast.makeText(ListContactActivity.this,"Error : "+e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
 
-
                     }
                 })
                 .setNeutralButton("No", null).show();
@@ -110,7 +115,7 @@ public class ListContactActivity extends AppCompatActivity {
 
     private void onMenuContextEditClick() {
         Intent gotoForm = new Intent(ListContactActivity.this, FormContactActivity.class);
-        gotoForm.putExtra(PARAM_CONTACT,selectContact);
+        gotoForm.putExtra(PARAM_CONTACT, selectContact.getId());
         startActivity(gotoForm);
     }
 
@@ -118,7 +123,7 @@ public class ListContactActivity extends AppCompatActivity {
 
         List<Contact> all;
 
-        all = contactList == null ? ContactBusinessService.findAllWithoutDependecies() : contactList;
+        all = contactList == null ? ContactBusinessService.findAll() : contactList;
 
         listView.setAdapter(new ContactListAdapter(this, all));
         ContactListAdapter adapter = (ContactListAdapter) listView.getAdapter();

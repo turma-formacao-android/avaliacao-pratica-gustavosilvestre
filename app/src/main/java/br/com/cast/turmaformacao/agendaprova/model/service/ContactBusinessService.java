@@ -59,6 +59,7 @@ public final class ContactBusinessService {
     public static List<Contact> getByName(String name) {
 
         List<Contact> contactList = ContactRepository.getByName(name);
+
         return contactList;
     }
 
@@ -123,6 +124,21 @@ public final class ContactBusinessService {
 
         for (SocialNetwork socialNetwork : contact.getSocialNetworksList()) {
             SocialNetworkBusinessService.delete(socialNetwork);
+        }
+    }
+
+    public static Contact getById(int id) {
+        Contact contact = ContactRepository.getById(id);
+
+        contact = getDependencies(contact);
+
+        return contact;
+    }
+
+    public static void saveContactAndroid(List<Contact> lista) {
+
+        for(Contact contact : lista){
+            save(contact);
         }
     }
 }
